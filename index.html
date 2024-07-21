@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator</title>
+</head>
+<body>
+    <h3>Random Number (1-7)</h3>
+    <button size="large" onclick="generateRandomNumber()">Generate Number</button>
+    <button size="large" onclick="checkVoice()">Voice</button>
+    <p id="result" style="font-size: 100px; padding: 5px; margin: 5px"></p>
+    <p id="voice" style="font-size: 50px; padding: 5px; margin: 5px"></p>
+
+    <script>
+        
+        function generateRandomNumber() {
+            const paragraphElement = document.getElementById("result");
+            let previousNumber = paragraphElement.textContent;
+
+            // Generate a random number between 1 and 7 (inclusive)
+            let randomNumber = Math.floor(Math.random() * 7) + 1;
+            
+            // Check if the new number is the same as the previous one
+            if (randomNumber == previousNumber) {
+            // If it's the same, regenerate until it's different
+            do {
+                 randomNumber = Math.floor(Math.random() * 7) + 1;
+             } while (randomNumber == previousNumber);
+            }
+
+            paragraphElement.textContent = randomNumber;
+            cleanVoice();
+        }
+
+        function checkVoice(){
+            const voices = ["Do", "Rai", "Mi", "Fa", "Suo", "La", "Xi"];
+            const paragraphElement = document.getElementById("result");
+            let currentNumber = paragraphElement.textContent;
+
+            console.log(voices[currentNumber-1]);
+            const voiceElement = document.getElementById("voice");
+            voiceElement.textContent = voices[currentNumber-1];
+        }
+
+        function cleanVoice(){
+            const voiceElement = document.getElementById("voice");
+            voiceElement.textContent = "";
+        }
+    </script>
+</body>
+</html>
